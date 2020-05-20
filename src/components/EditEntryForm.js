@@ -8,6 +8,7 @@ const EditEntryForm = (props) => {
     const editEntry = (event) => {
         event.preventDefault();
         const listing = {
+            id: editById,
             name: editName,
             number: editNumber,
         }
@@ -18,7 +19,7 @@ const EditEntryForm = (props) => {
             setTimeout(() => {
                 setErrorMessage(null)
             }, 5000)
-        }).then(setPersons(persons.map(person => person.id !== +editById ? person : listing)))
+        }).then(setPersons(persons.map(person => person.id !== editById ? person : listing)))
         setEditName('')
         setEditNumber('')
         setEditById('')
@@ -35,12 +36,13 @@ const EditEntryForm = (props) => {
                     <div>
                         Name: <input
                             value={editName}
-                            onChange={handleNameEdit} />
+                            onChange={handleNameEdit}
+                            placeholder={'New name'} />
                     </div>
                     <div>
                         Number: <input
                             value={editNumber}
-                            onChange={handleNumberEdit} /></div>
+                            onChange={handleNumberEdit} placeholder={'New number'} /></div>
                     <div>
                         <button onClick={showForm}>Go Back</button>
                         <button type="submit">Submit Update</button>

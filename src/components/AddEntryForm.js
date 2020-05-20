@@ -19,6 +19,9 @@ const AddEntryForm = (props) => {
                 setNewName('')
                 setNewNumber('')
                 setSuccessMessage('Number successfully replaced')
+                setTimeout(() => {
+                    setSuccessMessage(null)
+                }, 3000);
             }
         }
         else if (persons.filter(p => p.name === newName).length > 0) {
