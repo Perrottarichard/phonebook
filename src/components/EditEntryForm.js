@@ -14,11 +14,12 @@ const EditEntryForm = (props) => {
         }
         services.update(editById, listing).catch(error => {
             setErrorMessage(
-                `That contact was already removed from server`
+                'Something went wrong.  Make sure the name is 3 character or longer, and the phone number is at least 8 digits'
             )
             setTimeout(() => {
                 setErrorMessage(null)
             }, 5000)
+            return setPersons(persons.map(person => person))
         }).then(setPersons(persons.map(person => person.id !== editById ? person : listing)))
         setEditName('')
         setEditNumber('')

@@ -98,6 +98,7 @@ const App = () => {
         newNumber={newNumber}
         setNewNumber={setNewNumber}
         setSuccessMessage={setSuccessMessage}
+        setErrorMessage={setErrorMessage}
       />
       <EditEntryForm
         persons={persons}

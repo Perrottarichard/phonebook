@@ -3,16 +3,21 @@ import services from './services'
 
 const AddEntryForm = (props) => {
 
-    const { persons, newName, newNumber, setPersons, setNewName, setNewNumber, handleNumberInput, handlePersonInput, setSuccessMessage } = props
+    const { persons, newName, newNumber, setPersons, setNewName, setNewNumber, handleNumberInput, handlePersonInput, setSuccessMessage, setErrorMessage } = props
 
     const addEntry = (event) => {
         event.preventDefault()
-        if (persons.filter(p => p.name === newName).length > 0 && newNumber.length !== 0) {
+        if (persons.filter(p => p.name === newName).length > 0 && newNumber.length >= 8) {
             let result = window.confirm(`${newName} is already in the phonebook. Would you like to replace the old number?`)
             if (result) {
                 let newListing = { name: newName, number: newNumber };
                 let id = persons.filter(p => p.name === newName).map(p => p.id);
-                services.update(id, newListing).then(listing => {
+                services.update(id, newListing).catch(error => {
+                    setErrorMessage(error.response.data)
+                    setTimeout(() => {
+                        setErrorMessage(null)
+                    }, 5000);
+                }).then(listing => {
                     setPersons(persons.map(person => person.name !== newName ? person : listing)
                     )
                 })
