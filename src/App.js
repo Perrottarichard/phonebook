@@ -27,7 +27,6 @@ const App = () => {
       .then(allPersons => {
         setPersons(allPersons)
       })
-    console.log('useEffect running')
   }, [])
 
   //EVENT HANDLERS
@@ -98,6 +97,7 @@ const App = () => {
         newNumber={newNumber}
         setNewNumber={setNewNumber}
         setSuccessMessage={setSuccessMessage}
+        errorMessage={errorMessage}
         setErrorMessage={setErrorMessage}
       />
       <EditEntryForm
